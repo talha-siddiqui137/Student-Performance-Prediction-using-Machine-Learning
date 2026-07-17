@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 
 
 #  load and understand data 
@@ -41,18 +42,76 @@ print("Duplicate rows:", df.duplicated().sum())
 num_cols = df.select_dtypes(include="number").columns
 cat_cols = df.select_dtypes(include=["object", "str"]).columns
 
-print(num_cols)
-print(cat_cols)
+# EDA Graph
 
 
+# 1. Distribution of Exam Scores
+
+plt.figure(figsize=(8,5))
+
+plt.hist(df["Exam_Score"], bins=20, color='purple', edgecolor = 'black')
+
+plt.xlabel("Exam Score")
+plt.ylabel("Number of Students")
+plt.title("Distribution of Exam Scores")
+
+plt.grid(True)
+plt.show()
+
+
+# 2. Hours Studied vs Exam Score
+
+plt.figure(figsize=(8,5))
+
+plt.scatter(
+    df["Hours_Studied"],
+    df["Exam_Score"], color='green',alpha=0.5
+)
+
+plt.xlabel("Hours Studied")
+plt.ylabel("Exam Score")
+plt.title("Hours Studied vs Exam Score")
+
+plt.grid(True)
+plt.show()
+
+
+
+# 3. Attendance vs Exam Score
+
+plt.figure(figsize=(8,5))
+
+plt.scatter(
+    df["Attendance"],
+    df["Exam_Score"], color='orange',alpha=0.5
+)
+
+plt.xlabel("Attendance")
+plt.ylabel("Exam Score")
+plt.title("Attendance vs Exam Score")
+
+plt.grid(True)
+plt.show()
+
+# 4. Previous Scores vs Exam Score
+
+plt.figure(figsize=(8,5))
+
+plt.scatter(
+    df["Previous_Scores"],
+    df["Exam_Score"], color='gray',alpha=0.5
+)
+
+plt.xlabel("Previous Scores")
+plt.ylabel("Exam Score")
+plt.title("Previous Scores vs Exam Score")
+
+plt.grid(True)
+plt.show()
 
 # encoding 
 
 df = pd.get_dummies(df, drop_first=True, dtype=int)
-
-print(df.info())
-
-print(df.head(10))
 
 
 
@@ -65,6 +124,15 @@ y = df["Exam_Score"]
 # Train-Test Split
 
 X_train, X_test, y_train, y_test = train_test_split(X, y , test_size=0.2, random_state=42)
+
+
+scaler = StandardScaler()
+
+# Learn scaling parameters from training data
+X_train = scaler.fit_transform(X_train)
+
+# Apply the same parameters to test data
+X_test = scaler.transform(X_test)
 
 
 
