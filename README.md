@@ -122,6 +122,7 @@ This will:
 **Model Comparison**
 
 ![Model Comparison](project_Outputs/Model-Comparison.png.png)
+![Model Comparison](project_Outputs/Model-performance.png.png)
 
 ---
 
