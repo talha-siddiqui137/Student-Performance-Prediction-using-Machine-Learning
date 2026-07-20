@@ -128,6 +128,7 @@ y = df["Exam_Score"]
 
 X_train, X_test, y_train, y_test = train_test_split(X, y , test_size=0.2, random_state=42)
 
+# Feature Scaling
 
 scaler = StandardScaler()
 
@@ -171,24 +172,92 @@ print(results_df)
 
 
 
+# 5. Actual vs Predicted Graph
+
+plt.figure(figsize=(7,7))
+
+plt.scatter(
+    y_test,
+    y_pred,alpha=0.5
+)
+
+plt.xlabel("Actual Exam Score")
+plt.ylabel("Predicted Exam Score")
+
+plt.title(
+    "Actual vs Predicted Exam Scores"
+)
+
+plt.grid(True)
+
+plt.show()
+
+
+# 6. Residual Plot
+
+residuals = y_test - y_pred
+
+
+plt.figure(figsize=(8,5))
+
+plt.scatter(
+    y_pred,
+    residuals,color='yellow',alpha=0.5
+)
+
+plt.axhline(
+    y=0
+)
+
+plt.xlabel("Predicted Score")
+plt.ylabel("Residuals")
+
+plt.title("Residual Plot")
+
+plt.grid(True)
+
+plt.show()
+
+
+# 7. Compare Models Bar Chart
+
+plt.figure(figsize=(8,5))
+
+plt.bar(
+    results_df["Model"],
+    results_df["R² Score"], color='brown',edgecolor= 'black'
+)
+
+plt.xlabel("Models")
+plt.ylabel("R² Score")
+
+plt.title("Model Performance Comparison")
+
+plt.show()
+
+
+
 # Load Dataset
-#       ↓
-# Understand Data (.info(), .describe())
-#       ↓
-# Handle Missing Values
-#       ↓
-# Remove Duplicates
-#       ↓
-# Encode Categorical Features
-#       ↓
+#         ↓
+# Data Understanding
+# (info, describe, missing values)
+#         ↓
+# Data Cleaning
+#         ↓
+# EDA
+# (histogram, scatter plots, heatmap)
+#         ↓
+# Encoding
+#         ↓
 # Split X and y
-#       ↓
+#         ↓
 # Train-Test Split
-#       ↓
-# Feature Scaling
-#       ↓
-# Train Model
-#       ↓
-# Prediction
-#       ↓
-# Evaluation
+#         ↓
+# Scaling
+#         ↓
+# Train Multiple Models
+#         ↓
+# Compare Metrics
+#         ↓
+# Prediction Visualization
+# (actual vs predicted, residuals)
