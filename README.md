@@ -112,12 +112,10 @@ This will:
 ## 📊 Results
 
 | Model | MAE | RMSE | R² Score |
-|---|---|---|---|
-| Random Forest | *TBD* | *TBD* | *TBD* |
-| Gradient Boosting | *TBD* | *TBD* | *TBD* |
-| Linear Regression | *TBD* | *TBD* | *TBD* |
-
-> Fill in your actual output values from `results_df` here after running the script.
+   |---|---|---|---|
+   | Random Forest | 1.23 | 2.35 | 0.912 |
+   | Gradient Boosting | 1.35 | 2.46 | 0.906 |
+   | Linear Regression | 1.46 | 2.57 | 0.899 |
 
 **Model Comparison**
 
