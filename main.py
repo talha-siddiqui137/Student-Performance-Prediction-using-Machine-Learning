@@ -3,7 +3,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 
 #  load and understand data 
 
@@ -134,6 +137,37 @@ X_train = scaler.fit_transform(X_train)
 # Apply the same parameters to test data
 X_test = scaler.transform(X_test)
 
+# Train Model
+
+models = {
+    "Random Forest": RandomForestRegressor(n_estimators=300,max_depth=10,min_samples_split=5,random_state=42),
+    "Gradient Boosting": GradientBoostingRegressor(n_estimators=200,learning_rate=0.05,max_depth=3,random_state=42),
+    "Linear Regression": LinearRegression()
+}
+
+
+results = []
+
+for name, model in models.items():
+
+    model.fit(X_train, y_train)
+
+    y_pred = model.predict(X_test)
+# Evaluation
+
+    mae = mean_absolute_error(y_test, y_pred)
+    rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+    r2 = r2_score(y_test, y_pred)
+
+    results.append([name, mae, rmse, r2])
+
+
+results_df = pd.DataFrame(
+    results,
+    columns=["Model", "MAE", "RMSE", "R² Score"]
+)
+
+print(results_df)
 
 
 
